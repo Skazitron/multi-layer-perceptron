@@ -1,0 +1,3 @@
+/Users/kazisha/Developer/SimpleLearning/build/CMakeFiles/SimpleLearning.dir
+/Users/kazisha/Developer/SimpleLearning/build/CMakeFiles/edit_cache.dir
+/Users/kazisha/Developer/SimpleLearning/build/CMakeFiles/rebuild_cache.dir
