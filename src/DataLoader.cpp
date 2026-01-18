@@ -16,7 +16,6 @@ std::pair<Eigen::MatrixXf, Eigen::MatrixXf> DataLoader::loadData(const std::stri
         return {};
     }
 
-    // Check if path has subdirectories (classes)
     bool hasSubdirs = false;
     for (const auto& entry : fs::directory_iterator(path)) {
         if (entry.is_directory()) {
@@ -34,9 +33,8 @@ std::pair<Eigen::MatrixXf, Eigen::MatrixXf> DataLoader::loadData(const std::stri
                          try {
                             CImg<float> img(imgEntry.path().string().c_str());
                             img.resize(imgSize, imgSize);
-                            img.channel(0); // Take first channel (grayscale)
+                            img.channel(0);                             
                             
-                            // Normalize to 0-1
                             img /= 255.0f;
 
                             Eigen::VectorXf vec(imgSize * imgSize);
@@ -54,16 +52,21 @@ std::pair<Eigen::MatrixXf, Eigen::MatrixXf> DataLoader::loadData(const std::stri
             }
         }
     } else {
-        // Flat directory, treat as one class (or just testing)
-        // For simplicity, let's just load them with label 0
+
+
         numClasses = 1;
         for (const auto& entry : fs::directory_iterator(path)) {
             if (entry.is_regular_file()) {
                try {
                     CImg<float> img(entry.path().string().c_str());
                     img.resize(imgSize, imgSize);
+
+
                     img.channel(0);
                     img /= 255.0f;
+
+
+
 
                     Eigen::VectorXf vec(imgSize * imgSize);
                     int idx = 0;
@@ -73,7 +76,7 @@ std::pair<Eigen::MatrixXf, Eigen::MatrixXf> DataLoader::loadData(const std::stri
                     imageVectors.push_back(vec);
                     labelIndices.push_back(0);
                 } catch (const cimg_library::CImgException& e) {
-                     // Not an image or load failed
+                     
                 }
             }
         }
@@ -87,12 +90,17 @@ std::pair<Eigen::MatrixXf, Eigen::MatrixXf> DataLoader::loadData(const std::stri
     int numSamples = imageVectors.size();
     int inputDim = imgSize * imgSize;
     
+
+
     Eigen::MatrixXf X(inputDim, numSamples);
+
     Eigen::MatrixXf Y = Eigen::MatrixXf::Zero(numClasses, numSamples);
 
     for (int i = 0; i < numSamples; ++i) {
+
         X.col(i) = imageVectors[i];
-        Y(labelIndices[i], i) = 1.0f; // One-hot encoding
+
+        Y(labelIndices[i], i) = 1.0f; 
     }
 
     std::cout << "Loaded " << numSamples << " images from " << numClasses << " classes." << std::endl;

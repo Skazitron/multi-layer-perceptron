@@ -75,8 +75,6 @@ int main() {
             std::string path;
             std::cin >> path;
             
-            // Load single image using CImg logic here or expose helper?
-            // Re-use logic:
             try {
                 cimg_library::CImg<float> img(path.c_str());
                 img.resize(imgSize, imgSize);
