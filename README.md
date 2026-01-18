@@ -5,11 +5,11 @@ In order to build and run it, it's important for you to edit the CMakeLists.txt 
 
 Take a look at the main file, which was mostly AI generated, to get a better understanding of how to use this program. It supports a number of commands. Namely:
 ```
-                load <path_to_data>      Load images from directory"`
+                load <path_to_data>      Load images from directory
                 train <epochs> <lr>      Train the model
-                predict <image_path>     Predict a single image"
-                exit                     Exit the application"
-                help                     Show this message";
+                predict <image_path>     Predict a single image
+                exit                     Exit the application
+                help                     Show this message
 
 ```
 
