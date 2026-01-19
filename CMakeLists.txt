@@ -21,5 +21,4 @@ add_executable(SimpleLearning
     src/DataLoader.cpp
 )
 
- This automatically handles the include paths for you
 target_link_libraries(SimpleLearning PRIVATE Eigen3::Eigen)
